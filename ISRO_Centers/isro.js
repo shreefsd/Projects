@@ -1,22 +1,21 @@
+let centerData
 async function fetchData() {
     try {
         const resp = await fetch("https://isro.vercel.app/api/centres");
         let data = await resp.json();
         // console.log(data);
-        let centData = data.centres;
-        searchRender(centData);
+        centerData = data.centres;
+        render(centerData);
     }
     catch (error) {
         console.log(error);
     }
 }
-function createTable(data) {
+function render(data) {
     const tdiv = document.getElementById("tabled");
     const table = document.createElement("table");
     const tbody = document.createElement("tbody");
     const val = ["name", "Place", "State"];
-
-    
     
     data.forEach(itm => {
 
@@ -33,7 +32,7 @@ function createTable(data) {
             }else{
                 a = "STATE";
             }
-            cell.innerHTML = `<div class="head"> ${a} </div> ${itm[heads]}`;
+            cell.innerHTML = `<div class="head"> ${a} </div> <div class="tdata"> ${itm[heads]} </div>`;
             
             row.appendChild(cell);
             
@@ -44,25 +43,43 @@ function createTable(data) {
     tdiv.appendChild(table);
 }
 
-function searchRender(centData) {
-    let input = document.getElementById("search");
-    let btnc = document.getElementById("center")
-    let btns = document.getElementById("state");
-    let btnp = document.getElementById("city");
-    let searchBtn = document.getElementById("searchBtn");
+function searchBar(e) {
+    const result = document.getElementById("tabled");
+    const input = document.getElementById("search").value.trim();
+    if (input === "") {
+        alert("Enter Details!")
+        result.innerHTML = "";
+        render(centerData);
+    } else {       
+        result.innerHTML = "";
+        let searchBy = e.id;
+        let data = [];
+        let i = 0;
+        let val = 0;
+        centerData.forEach(itm => {
+            if (input.toLowerCase() === itm[searchBy].toLowerCase()) {
+                data[i] = itm;
+                i++;
+                val=1;
+            }
+        });
+        if(val===1){
+        render(data)}
+        else{
+            alert("Enter Valid Information!");
+            render(centerData);
+        }
+    }
+}
+
+function searchRender() { 
+    let btnc = document.getElementById("name")
+    let btns = document.getElementById("State");
+    let btnp = document.getElementById("Place");
     
     let flagc = false;
     let flags = false;
     let flagp = false;
-
-    input = input.value.toLowerCase();
-    const filteredData = centData.filter(valData => {
-        return (
-            valData.State.toLowerCase().includes(input.value) ||
-            valData.Place.toLowerCase().includes(input.value) ||
-            valData.name.toLowerCase().includes(input.value)
-        )
-    });
 
     btnc.addEventListener("click", () => {
         if (flagc) {
@@ -71,7 +88,6 @@ function searchRender(centData) {
         } else {
             flagc = true;
             btnc.classList.add('clicked');
-            return createTable(filteredData)
         }
     })
     btns.addEventListener("click", () => {
@@ -81,7 +97,6 @@ function searchRender(centData) {
         } else {
             flags = true;
             btns.classList.add('clicked');
-            return createTable(filteredData)
         }
     })
     btnp.addEventListener("click", () => {
@@ -91,14 +106,8 @@ function searchRender(centData) {
         } else {
             flagp = true;
             btnp.classList.add('clicked');
-            return createTable(filteredData)
         }
     })
-    
-    console.log(filteredData);
-    if ( input === '' && flagc === false && flags === false && flagp === false) {
-        console.log("I am in if");
-        return createTable(centData);
-    }
 }
+searchRender()
 fetchData()
