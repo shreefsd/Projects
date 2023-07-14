@@ -1,9 +1,11 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-body{
+
+/* Giving the styling to body of html  */
+body {
     background-image: url("img-10.jpg");
     background-repeat: no-repeat;
     background-position: center;
@@ -12,23 +14,25 @@ body{
     box-sizing: border-box;
     overflow: hidden;
 }
-.container{
+
+/* Styling for the  container  */
+.container {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     /* border: 1px solid black; */
     border-radius: 7px;
     /* background-color: aliceblue; */
-    background: linear-gradient(135deg,rgba(255,255,255,0.1),rgba(255,255,255,0));
-    backdrop-filter: blur(10px);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);                                       /* 27 28 29 giving glass effect */
     -webkit-backdrop-filter: blur(10px);
     width: 600px;
     height: 400px;
 }
 
 /* Heade Title */
-#head{
+#head {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -36,7 +40,8 @@ body{
     color: orange;
 
 }
-#head img{
+
+#head img {
     display: flex;
     height: 50px;
     border-radius: 10px;
@@ -44,19 +49,20 @@ body{
 }
 
 /* Title */
-h3{
+h3 {
     text-align: center;
     padding: 10px;
     background-color: #0448ab;
     border-radius: 15px;
     margin: 5px;
 }
-span{
+
+#h3{
     color: aqua;
 }
 
 /* Title and Page info */
-#title{
+#title {
     border-radius: 10px;
     background-color: #0448ab;
     padding: 5px;
@@ -66,22 +72,30 @@ span{
 }
 
 /* Search Box And Buttons */
-#search{
+#searchOpt{
     padding: 5px;
     border: none;
     border-radius: 16px;
-    width: 45%;
+    width: 100%;
     margin-bottom: 10px;
-    margin-left: 5px;
+    margin-left: 10px;
+    background: #fff;
 }
-.searchbox img{
-    position: absolute;
-    top: 37.5%;
-    left: 39%;
-    height: 22px;
-    width: 30px;
+#search{
+    border: none;
+    border-radius: 16px;
+    padding: 5px;
+    width: 39%;
+    margin-bottom: 5px;
+    outline: none;
 }
-button{
+#searchIcon{
+    position: relative;
+    margin-left: 10%;        /*Styling of search image  */
+    font-size: 20px;
+    color: #777;
+}
+button {
     padding: 5px;
     border-radius: 16px;
     margin-left: 5px;
@@ -91,31 +105,121 @@ button{
     background-color: #0448ab;
     cursor: pointer;
 }
-.clicked{
-    background-color: #38b6ff;  /* Chnge property after click */
+
+.clicked {
+    background-color: #38b6ff;
+    /* Change property after click */
     color: #ffffff;
 }
 
 /* Table section */
-#tabled{
+#tabled {
     width: 600px;
     height: 210px;
+    margin-top: 5px;
     overflow: auto;
 }
-table{
+
+table {
     text-align: left;
     margin-left: 5px;
+    width: 100%;
+    box-sizing: border-box;
 }
-.row{
+
+tbody {
     background-color: #0448ab;
     border-radius: 5px;
+    padding: 5px;
     border-collapse: collapse;
 }
-td{
+
+td {
     color: whitesmoke;
     border-radius: 5px;
     border-collapse: collapse;
 }
-.head{
-    font-weight: bold;
+
+.head {
+    font-weight: 600;
+    padding: 5px;
 }
+
+.tdata {
+    font-weight: 300;
+    padding: 0 5px 5px 5px;
+}
+
+/* Scroll Bar Styling */
+::-webkit-scrollbar {
+    width: 8px;                /* Giving height and width of scroll bar */        
+    height: 3px;
+}
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;       /* the track (progress bar) of the scrollbar */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: dimgray;           /* the draggable scrolling handle. */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #fff;                  /* the draggable scrolling handle after hover */    
+}
+
+::-webkit-scrollbar-corner {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);                                  
+    -webkit-backdrop-filter: blur(10px);            /* the bottom corner of the scrollbar, where both horizontal and vertical scrollbars meet. */   
+}
+
+/* Mobile view */
+@media (max-width: 600px) {  /* Responsice CSS for mobile view*/
+    .container {
+      width: 90%;
+      height: auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid black;
+    }
+    #searchOpt{
+        position: relative;
+        padding: 5px;
+        border: 1px solid black;
+        border-radius: 16px;
+        width: 100%;
+        margin-bottom: 10px;
+        margin-left: 5px;
+        background: #fff;
+    }
+    #search{
+        border: none;
+        border-radius: 16px;
+        padding: 5px;
+        margin-top: 5px;
+        width: 90%;
+        outline: none;
+    }
+    #searchIcon{
+        position: relative;
+        margin-left: 10%;        /*Styling of search image  */
+        font-size: 20px;
+        color: #777;
+    }
+    #tabled {
+      width: 100%;
+      height: auto;
+      max-height: 200px;
+    }
+  
+    table {
+      width: 100%;
+    }
+    button {
+      margin-left: 10;
+      margin-top: 10px;
+      width: 98%;
+    }
+  }
